@@ -5,8 +5,8 @@ import TheWelcome from './components/TheWelcome.vue'
 
 <template>
   <div id="app">
-    <header>
-      <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+   <!--   <header>
+   <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
 
       <div class="wrapper">
         <HelloWorld msg="You did it!" />
@@ -15,7 +15,13 @@ import TheWelcome from './components/TheWelcome.vue'
 
     <main>
       <TheWelcome />
-    </main>
+    </main> --> 
+    <router-link to="/">Home</router-link>
+    <router-link to="/segmentos">Segmentos</router-link>
+    <router-link to="/ahorros">Ahorros</router-link>
+    <router-link to="/carga">Carga</router-link>
+    <router-link to="/userlogin">User Login</router-link>
+    <router-view></router-view>
   </div>
 </template>
 
