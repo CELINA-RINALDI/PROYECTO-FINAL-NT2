@@ -11,7 +11,7 @@ import UserLogin from './components/UserLogin.vue'
 
 
 const routes = [
-  {path: '/',
+  {path: '/home',
 component: Home },
 {path: '/segmentos',
 component: Segmentos },
