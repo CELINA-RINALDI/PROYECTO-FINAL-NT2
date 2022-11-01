@@ -1,27 +1,30 @@
 <template>
  <div id="app">
   <div>Bienvenido</div>
+   <br> 
     <nav class="navbar fixed-top" style="background-color: #ffeee4">
-        <div class="d-flex">
        <router-link to="/UserLogin" class="navbar-brand"
             >Login</router-link>
-        </div>
     </nav>
-    <router-view></router-view>
+   <router-view></router-view>
   </div>
 </template>
 <script>
+import { useStore } from './components/store';
+
 export default {
-  name: "App",
+  name: 'App',
+  setup() {
+    // dejamos disponible el store
+    const store = useStore();
+    return {store};
+  },
+ /* async created() {
+    await this.store.init(); 
+  } */
 };
 </script>
 
 <style>
-.app {
-padding: top;
-}
-.iconoBoton {
-  width: 50px;
-  height: 50px;
-}
+
 </style>
