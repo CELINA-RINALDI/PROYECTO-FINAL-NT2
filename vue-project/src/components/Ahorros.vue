@@ -6,6 +6,7 @@
   <Tabla
     :data="gridData"
     :columns="gridColumns"
+    :columnsText="columnsHeader"
     :filter-key="searchQuery">
   </Tabla>
 </div>
@@ -23,6 +24,7 @@ export default {
     return {
         searchQuery: '',
         gridColumns: ['description', 'amount', 'createdAt'],
+        columnsHeader: ['Descripcion del ahorro', 'Monto ahorrado', 'Fecha de carga'],
         gridData: [
             {"createdAt":"2022-10-31T05:32:01.851Z","userid":19,"amount":19,"description":"description 1","id":"1"},
             {"createdAt":"2022-10-31T03:50:27.753Z","userid":41,"amount":70,"description":"description 2","id":"2"},

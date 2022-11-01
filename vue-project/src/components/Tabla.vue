@@ -3,7 +3,7 @@
   <table>
     <thead>
       <tr>
-        <th v-for="key in columns"
+        <th v-for="key in columnsText"
           @click="sortBy(key)"
           :class="{ active: sortKey == key }"
           :key="key">
@@ -34,6 +34,7 @@ export default {
   props: {
     data: Array,
     columns: Array,
+    columnsText: Array,
     filterKey: String
   },
   data: function () {
