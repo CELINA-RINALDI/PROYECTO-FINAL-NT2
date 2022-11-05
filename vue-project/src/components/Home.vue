@@ -35,7 +35,6 @@ export default {
     },
     created() {
     this.movimientos = this.store.movimientos;
-    this.$forceUpdate();
     },
   name: "Home",
   setup() {
