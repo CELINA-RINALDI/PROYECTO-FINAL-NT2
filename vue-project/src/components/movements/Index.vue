@@ -19,6 +19,7 @@
 <script setup>
 import { toRefs, defineProps } from 'vue';
 import Movimiento from "./Movimiento.vue";
+import { useStore } from "../../store/store";
 const props = defineProps({
     movimientos: {
         type: Array,
@@ -26,8 +27,9 @@ const props = defineProps({
     },
 });
 const { movimientos } = toRefs(props);
+ const store = useStore();
 const remove = (id) => {
-    console.log("remove", id);
+   store.eliminarMovimiento(id);
 }
 </script>
 
