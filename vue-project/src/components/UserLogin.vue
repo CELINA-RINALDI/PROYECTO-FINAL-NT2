@@ -14,6 +14,7 @@
     </div>
 </template>
 <script>
+import { useStore } from '../store/store';
     export default {
         name: 'Login',
         data() {
@@ -24,22 +25,17 @@
                 }
             }
         },
+        setup() {
+            const store = useStore();
+           return { store };
+        },
         methods: {
             validarLogin() {
-                if(this.input.username != "" && this.input.password != "") {
-                    if(this.input.username == this.input.password) {
-                        this.$router.replace('home');
-                    }
-                  /*  if(this.input.username == this.$parent.mockAccount.username && this.input.password == this.$parent.mockAccount.password) {
-                        this.$emit("authenticated", true);
-                        this.$router.replace({ name: "secure" });
-                    } else {
-                        console.log("The username and / or password is incorrect");
-                    } */
-                } else {
-                    console.log("A username and password must be present");
-                }
-            }
+          if (this.store.validarUsuario(this.input.username, this.input.password)) {
+            console.log(this.input.username)
+          this.$router.push('home') 
+          }
+          },
         }
     }
 </script>

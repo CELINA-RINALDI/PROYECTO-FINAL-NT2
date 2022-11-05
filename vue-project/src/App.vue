@@ -1,6 +1,6 @@
 <template>
  <div id="app">
-  <div>Bienvenido</div>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
    <br> 
     <nav class="navbar fixed-top" style="background-color: #ffeee4">
        <router-link to="/UserLogin" class="navbar-brand"
@@ -10,7 +10,7 @@
   </div>
 </template>
 <script>
-import { useStore } from './components/store';
+import { useStore } from './store/store';
 
 export default {
   name: 'App',
@@ -19,12 +19,20 @@ export default {
     const store = useStore();
     return {store};
   },
- /* async created() {
-    await this.store.init(); 
-  } */
+  async created() {
+    if(this.store.validarUsuario("admin@a.com", "admin")) {
+     this.store.init(); 
+    }
+  } 
 };
 </script>
 
 <style>
-
+#app {
+  padding-top: 4.5rem;
+  width: 100%;
+}
+.header {
+  background-color: #ffeee4;
+}
 </style>

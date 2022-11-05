@@ -1,6 +1,7 @@
 <template>
 <div>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <div>Bienvenido, {{store.userName}}</div>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> 
   <nav class="navbar navbar-inverse">
   <ul class="nav navbar-nav">
     <li> <router-link to="/carga">Carga</router-link
@@ -13,11 +14,28 @@
           ></li>
   </ul>
   </nav>
+  <div class="movimientos">
+            <Movimientos
+                :movimientos="movimientos"
+            />
+  </div>
   </div>
 </template> 
 <script>
-import { useStore } from './store';
+import { useStore } from  '../store/store';
+import Movimientos from "./movements/Index.vue";
 export default {
+  components: {
+        Movimientos,
+    },
+    data() {
+      return {
+      movimientos: [],
+    };
+    },
+    created() {
+    this.movimientos = this.store.movimientos;
+    },
   name: "Home",
   setup() {
    const store = useStore();
@@ -46,6 +64,9 @@ export default {
   border-radius: 0.25rem;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
     border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.movimientos {
+  height: 100px;
 }
 </style>
 
