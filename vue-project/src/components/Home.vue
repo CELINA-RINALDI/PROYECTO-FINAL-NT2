@@ -2,8 +2,8 @@
 <div>
   <div>Bienvenido, {{store.userName}}</div>
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> 
-  <nav class="navbar navbar-inverse">
-  <ul class="nav navbar-nav">
+  <nav class="navbar navbar-inverse" id="nav">
+  <ul class="nav navbar-nav" id="nav">
     <li> <router-link to="/carga">Carga</router-link
           ></li>
     <li><router-link to="/Segmentos">Segmentos</router-link
@@ -69,6 +69,10 @@ export default {
 }
 .movimientos {
   height: 100px;
+}
+#nav {
+   display: inline-block;
+   width: 100%;
 }
 </style>
 

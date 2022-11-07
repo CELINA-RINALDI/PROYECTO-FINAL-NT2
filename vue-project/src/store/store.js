@@ -31,7 +31,7 @@ export const useStore = defineStore('nt2', {
      }, 
      actions: {
         incrementar() {
-            this.contador++
+           return (this.movimientos.length) + 1
         }, 
         async init() {
             this.cargarMovimientos();
@@ -56,6 +56,37 @@ export const useStore = defineStore('nt2', {
         },
         actualizarSaldo(){
             this.saldo++
+        },
+       async agregarMovimiento(mov) {       
+        mov.amount = parseInt(mov.amount)
+        let res = await fetch(this.url + 'movements', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(mov)
+        });
+
+        if (res.ok) {
+          console.log('movimiento cargado!')
+        } else {
+            alert('error cargando el movimiento');
+        }
+    },
+    async eliminarMovimiento(id) {
+        let res = await fetch(this.url + 'movements/' + id , {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (res.ok) {
+          console.log('movimiento eliminado!')
+        } else {
+            alert('error eliminando el movimiento');
+        }
+    }
         }
      },
-})
+)
