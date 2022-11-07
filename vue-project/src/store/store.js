@@ -6,6 +6,7 @@ export const useStore = defineStore('nt2', {
     movimientos: [],
     usuarioValido: false,
     userName: '',
+    saldo: 0,
     users: [{
         name: 'Admin',
         mail: 'admin@a.com',
@@ -23,6 +24,9 @@ export const useStore = defineStore('nt2', {
      getters: {
         getMovimientos() {
             return this.movimientos;
+        },
+        getSaldo(){
+            return this.saldo;
         }
      }, 
      actions: {
@@ -49,6 +53,9 @@ export const useStore = defineStore('nt2', {
             }
 
             return this.usuarioValido;
+        },
+        actualizarSaldo(){
+            this.saldo++
         }
      },
 })
