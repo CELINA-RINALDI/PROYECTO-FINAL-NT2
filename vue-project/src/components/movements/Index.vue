@@ -1,9 +1,10 @@
 <template>
     <div class="movements">
         <h2 class="title">Historial</h2>
+        <h3>{{ totalGastos }}</h3>
         <div class="content">
             <Movimiento
-                v-for="{ id, title, description, amount, esGasto } in movimientos"
+                v-for="{ id, title, description, amount, esGasto, categoria } in movimientos"
                 :key="id"
                 :id="id"
                 :title="title"
@@ -11,13 +12,14 @@
                 :amount="amount"
                 :esGasto="esGasto"
                 @remove="remove"
+                :categoria="categoria"
             />
         </div>
     </div>
 </template>
 
 <script setup>
-import { toRefs, defineProps } from 'vue';
+import { toRefs, defineProps, computed } from 'vue';
 import Movimiento from "./Movimiento.vue";
 import { useStore } from "../../store/store";
 const props = defineProps({
@@ -28,9 +30,17 @@ const props = defineProps({
 });
 const { movimientos } = toRefs(props);
  const store = useStore();
-const remove = (id) => {
-   store.eliminarMovimiento(id);
-}
+const remove = async (id) => {
+   await store.eliminarMovimiento(id);
+   movimientos.value.shift();
+} 
+const totalGastos = computed(() => {
+  const gastos = movimientos.value.filter(mov => mov.esGasto);
+  return gastos.reduce(
+    (previousValue, currentValue) => previousValue + currentValue.amount,
+    0
+  );
+})
 </script>
 
 <style scoped>

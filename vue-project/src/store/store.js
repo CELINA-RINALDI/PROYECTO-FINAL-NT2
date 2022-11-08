@@ -5,20 +5,24 @@ export const useStore = defineStore('nt2', {
     url: 'https://635735972712d01e1403e2b4.mockapi.io/',
     movimientos: [],
     usuarioValido: false,
+    usuarioActual: null,
     userName: '',
     users: [{
         name: 'Admin',
         mail: 'admin@a.com',
-        password: 'admin', },
+        password: 'admin', 
+     id: 1,},
     {
         name: "Celi",
         mail: 'celi@a.com',
         password: 'celina',
+        id: 2,
     },
     {
         name: "Javier",
         mail: 'javier@a.com',
         password: 'javier',
+        id:3,
     },],}),
      getters: {
         getMovimientos() {
@@ -30,7 +34,7 @@ export const useStore = defineStore('nt2', {
            return (this.movimientos.length) + 1
         }, 
         async init() {
-            this.cargarMovimientos();
+           await this.cargarMovimientos();
         },
         async cargarMovimientos() {
             const response = await fetch(this.url + 'movements/')
@@ -42,7 +46,8 @@ export const useStore = defineStore('nt2', {
             while (!this.usuarioValido && i < this.users.length) {
                 if (mail == this.users[i].mail && contra == this.users[i].password) {
                     this.usuarioValido = true;
-                    this.userName = this.users[i].name
+                    this.userName = this.users[i].name;
+                    this.usuarioActual = this.users[i];
                     console.log(this.userName)
                 }
                 i++
@@ -62,6 +67,7 @@ export const useStore = defineStore('nt2', {
 
         if (res.ok) {
           console.log('movimiento cargado!')
+          this.actualizarSegmento(mov);  
         } else {
             alert('error cargando el movimiento');
         }
@@ -79,7 +85,34 @@ export const useStore = defineStore('nt2', {
         } else {
             alert('error eliminando el movimiento');
         }
-    }
+    },
+  /* async actualizarSegmento(mov){
+          const response = await fetch(this.url + 'segments/')
+           const results = await response.json()
+            i = 0;
+            encontrado = false;
+           while(i < results.length && !encontrado) {
+                if(results[i].userId == this.usuarioActual.id && results[i].nombre == mov.categoria) {
+                    segAux = results[i]
+                    segAux.monto = segAux.monto + mov.amount;
+                    let res = await fetch(this.url + 'segments/' + results[i].id, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(segAux)
+                    });
+            
+                    if (res.ok) {
+                      console.log('segmento actualizado!')
+                    } else {
+                        alert('error actualizando el segmento');
+                    }
+                } else {
+                    i++;
+                }
+           }
+       } */
         }
      },
 )
