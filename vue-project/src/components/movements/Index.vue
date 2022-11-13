@@ -1,10 +1,10 @@
 <template>
     <div class="movements">
         <h2 class="title">Historial</h2>
-        <h3>{{ totalGastos }}</h3>
+        <h3 class="saldo">Tu saldo: {{ totalIngresos - totalGastos }}</h3>
         <div class="content">
             <Movimiento
-                v-for="{ id, title, description, amount, esGasto, categoria } in movimientos"
+                v-for="{ id, title, description, amount, esGasto, categoria } in store.movimientos"
                 :key="id"
                 :id="id"
                 :title="title"
@@ -28,14 +28,20 @@ const props = defineProps({
         default: () => [],
     },
 });
-const { movimientos } = toRefs(props);
+/*const { movimientos } = toRefs(props);*/
  const store = useStore();
 const remove = async (id) => {
    await store.eliminarMovimiento(id);
-   movimientos.value.shift();
-} 
+}
 const totalGastos = computed(() => {
-  const gastos = movimientos.value.filter(mov => mov.esGasto);
+  const gastos = store.movimientos.filter(mov => mov.esGasto);
+  return gastos.reduce(
+    (previousValue, currentValue) => previousValue + currentValue.amount,
+    0
+  );
+})
+const totalIngresos = computed(() => {
+  const gastos = store.movimientos.filter(mov => !mov.esGasto);
   return gastos.reduce(
     (previousValue, currentValue) => previousValue + currentValue.amount,
     0
@@ -60,5 +66,10 @@ const totalGastos = computed(() => {
   flex-direction: column;
   gap: 8px;
   overflow-y: scroll;
+}
+.saldo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>

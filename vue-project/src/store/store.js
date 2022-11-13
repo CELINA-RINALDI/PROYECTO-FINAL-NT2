@@ -66,8 +66,9 @@ export const useStore = defineStore('nt2', {
         });
 
         if (res.ok) {
-          console.log('movimiento cargado!')
-          this.actualizarSegmento(mov);  
+          console.log('movimiento cargado!');
+          this.cargarMovimientos(); 
+         /* this.actualizarSegmento(mov);  */
         } else {
             alert('error cargando el movimiento');
         }
@@ -82,6 +83,8 @@ export const useStore = defineStore('nt2', {
 
         if (res.ok) {
           console.log('movimiento eliminado!')
+           let movimientosUpdated = this.movimientos.filter(mov => mov.id != id);
+           this.movimientos = movimientosUpdated; 
         } else {
             alert('error eliminando el movimiento');
         }

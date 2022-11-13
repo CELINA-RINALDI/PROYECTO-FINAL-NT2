@@ -55,8 +55,8 @@ import { useStore } from '../store/store';
            return { store };
         },
         methods: {
-            validarDatos() {
-          if (this.input.title != '' && this.input.description != '' && this.input.amount != '') {
+            async validarDatos() {
+          if (this.input.title != '' && this.input.amount != '') {
             console.log(this.input.categoria)
             let elementoActivo = document.querySelector('input[name="tipo"]:checked');
             if(elementoActivo) {
@@ -70,8 +70,8 @@ import { useStore } from '../store/store';
                 alert('Faltan campos por completar!');
             }
             console.log(this.input)
-            this.store.agregarMovimiento(this.input); 
-            this.$router.push('home') 
+             this.store.agregarMovimiento(this.input); 
+             this.$router.push('home') 
           } else {
             alert('Faltan campos por completar!');
           }
