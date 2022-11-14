@@ -20,9 +20,9 @@ export default {
     return {store};
   },
   async created() {
-    if(this.store.validarUsuario("admin@a.com", "admin")) {
-     this.store.init(); 
-    }
+     if(this.store.validarUsuario("admin@a.com", "admin")) {
+     await this.store.init(); 
+    } 
   } 
 };
 </script>

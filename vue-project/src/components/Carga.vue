@@ -20,6 +20,16 @@
        <label for="gasto">Gasto</label><br>
         <input type="radio" id="ingreso" name="tipo" value="ingreso" v-model="input.esGasto">
         <label for="ingreso">Ingreso</label><br>
+       <label for="categoria">Categoria</label>
+       <select name="categoria" id="categoria" v-model="input.categoria">
+       <option value="veterinaria">Veterinaria</option>
+       <option value="supermercado">Supermercado</option>
+       <option value="servicios">Servicios</option>
+       <option value="entretenimiento">Entretenimiento</option>
+       <option value="gastosImprevistos">Gastos imprevistos</option>
+       <option value="otros">Otros</option>
+       </select>
+       <br><br>
        <button v-on:click="validarDatos()">Agregar</button>
      </form>
     </div>
@@ -35,7 +45,8 @@ import { useStore } from '../store/store';
                     title: "",
                     description: "",
                     amount: 0, 
-                    esGasto: null
+                    esGasto: null,
+                    categoria: "",
                 }
             }
         },
@@ -44,8 +55,9 @@ import { useStore } from '../store/store';
            return { store };
         },
         methods: {
-            validarDatos() {
-          if (this.input.title != '' && this.input.description != '' && this.input.amount != '') {
+            async validarDatos() {
+          if (this.input.title != '' && this.input.amount != '') {
+            console.log(this.input.categoria)
             let elementoActivo = document.querySelector('input[name="tipo"]:checked');
             if(elementoActivo) {
                 if(elementoActivo.value == 'gasto') {
@@ -58,8 +70,8 @@ import { useStore } from '../store/store';
                 alert('Faltan campos por completar!');
             }
             console.log(this.input)
-            this.store.agregarMovimiento(this.input); 
-            this.$router.push('home') 
+             this.store.agregarMovimiento(this.input); 
+             this.$router.push('home') 
           } else {
             alert('Faltan campos por completar!');
           }
