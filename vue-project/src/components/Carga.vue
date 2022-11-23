@@ -22,12 +22,12 @@
         <label for="ingreso">Ingreso</label><br>
        <label for="categoria">Categoria</label>
        <select name="categoria" id="categoria" v-model="input.categoria">
-       <option value="veterinaria">Veterinaria</option>
-       <option value="supermercado">Supermercado</option>
-       <option value="servicios">Servicios</option>
-       <option value="entretenimiento">Entretenimiento</option>
-       <option value="gastosImprevistos">Gastos imprevistos</option>
-       <option value="otros">Otros</option>
+       <option value="Veterinaria">Veterinaria</option>
+       <option value="Supermercado">Supermercado</option>
+       <option value="Servicios">Servicios</option>
+       <option value="Entretenimiento">Entretenimiento</option>
+       <option value="Gastos Imprevistos">Gastos imprevistos</option>
+       <option value="Otros">Otros</option>
        </select>
        <br><br>
        <button v-on:click="validarDatos()">Agregar</button>
@@ -62,6 +62,7 @@ import { useStore } from '../store/store';
             if(elementoActivo) {
                 if(elementoActivo.value == 'gasto') {
                     this.input.esGasto = true;
+                    this.store.actualizarSegmento(this.input)
       
                 } else {
                     this.input.esGasto = false;

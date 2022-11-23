@@ -1,7 +1,7 @@
 <template>
     <div class="movements">
         <h2 class="title">Historial</h2>
-        <h3 class="saldo">Tu saldo: {{ totalIngresos - totalGastos }}</h3>
+        <h3 class="saldo">Tu saldo: ${{ totalIngresos - totalGastos }}</h3>
         <div class="content">
             <Movimiento
                 v-for="{ id, title, description, amount, esGasto, categoria } in store.movimientos"

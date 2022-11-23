@@ -4,6 +4,7 @@ export const useStore = defineStore('nt2', {
     state: () => ({ appName: '',
     url: 'https://635735972712d01e1403e2b4.mockapi.io/',
     movimientos: [],
+    segmentos: [],
     usuarioValido: false,
     usuarioActual: null,
     userName: '',
@@ -40,6 +41,12 @@ export const useStore = defineStore('nt2', {
             const response = await fetch(this.url + 'movements/')
             const results = await response.json()
             this.movimientos = results
+        },
+        async cargarSegmentos() {
+            const response = await fetch(this.url + 'segment/')
+            const results = await response.json()
+            this.segmentos = results
+            console.log(results)
         },
         validarUsuario(mail, contra) {
             let i = 0
@@ -89,16 +96,18 @@ export const useStore = defineStore('nt2', {
             alert('error eliminando el movimiento');
         }
     },
-  /* async actualizarSegmento(mov){
-          const response = await fetch(this.url + 'segments/')
+   async actualizarSegmento(mov){
+          const response = await fetch(this.url + 'segment/')
            const results = await response.json()
-            i = 0;
-            encontrado = false;
+            let i = 0;
+            let encontrado = false;
            while(i < results.length && !encontrado) {
+            console.log(results[i].nombre , mov.categoria)
                 if(results[i].userId == this.usuarioActual.id && results[i].nombre == mov.categoria) {
-                    segAux = results[i]
+                    encontrado = true;
+                    let segAux = results[i]
                     segAux.monto = segAux.monto + mov.amount;
-                    let res = await fetch(this.url + 'segments/' + results[i].id, {
+                    let res = await fetch(this.url + 'segment/' + results[i].id, {
                         method: 'PUT',
                         headers: {
                             'Content-Type': 'application/json',
@@ -115,7 +124,7 @@ export const useStore = defineStore('nt2', {
                     i++;
                 }
            }
-       } */
+       } 
         }
      },
 )
