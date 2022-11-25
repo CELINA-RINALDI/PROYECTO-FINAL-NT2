@@ -1,6 +1,6 @@
 <template>
     <div class="segmentos">
-        <router-link to="/home" class="boton mx-5"
+        <router-link to="/home" class="boton btn btn-primary"
             >Volver a Home</router-link>
 <h1>Tus gastos segmentados:</h1>
 <div class="container">

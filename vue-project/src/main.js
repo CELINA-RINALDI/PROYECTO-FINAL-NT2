@@ -7,6 +7,7 @@ import Segmentos from './components/Segmentos.vue'
 import Ahorros from './components/Ahorros.vue'
 import Carga from './components/Carga.vue'
 import UserLogin from './components/UserLogin.vue'
+import Landing from './components/Landing.vue'
 import "bootstrap/dist/css/bootstrap.css";
 import pinia from '@/store/index';
 
@@ -23,6 +24,10 @@ component: Ahorros },
 component: Carga },
 {path: '/userlogin',
 component: UserLogin },
+{path: '/',
+component: Landing },
+
+
 ]
 
 const router = new VueRouter({

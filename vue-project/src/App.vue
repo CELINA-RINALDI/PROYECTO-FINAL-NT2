@@ -1,11 +1,7 @@
+
 <template>
  <div id="app">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-   <br> 
-    <nav class="navbar fixed-top" style="background-color: #ffeee4">
-       <router-link to="/UserLogin" class="navbar-brand"
-            >Login</router-link>
-    </nav>
    <router-view></router-view>
   </div>
 </template>
@@ -20,9 +16,9 @@ export default {
     return {store};
   },
   async created() {
-     if(this.store.validarUsuario("admin@a.com", "admin")) {
+    /* if(this.store.validarUsuario("admin@a.com", "admin")) {
      await this.store.init(); 
-    } 
+    } */
   } 
 };
 </script>

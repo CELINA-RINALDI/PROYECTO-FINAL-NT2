@@ -90,6 +90,9 @@ export const useStore = defineStore('nt2', {
 
         if (res.ok) {
           console.log('movimiento eliminado!')
+          console.log(this.movimientos.find(mov => mov.id == id))
+          this.actualizarSegmento(this.movimientos.find(mov => mov.id == id))
+          console.log(this.movimientos.find(mov => mov.id == id))
            let movimientosUpdated = this.movimientos.filter(mov => mov.id != id);
            this.movimientos = movimientosUpdated; 
         } else {
@@ -106,7 +109,11 @@ export const useStore = defineStore('nt2', {
                 if(results[i].userId == this.usuarioActual.id && results[i].nombre == mov.categoria) {
                     encontrado = true;
                     let segAux = results[i]
+                    if(mov.esGasto) {
+                    segAux.monto = segAux.monto - mov.amount;
+                    } else {
                     segAux.monto = segAux.monto + mov.amount;
+                    }
                     let res = await fetch(this.url + 'segment/' + results[i].id, {
                         method: 'PUT',
                         headers: {
