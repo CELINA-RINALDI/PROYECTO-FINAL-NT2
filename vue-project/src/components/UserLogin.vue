@@ -3,7 +3,7 @@
         <router-link to="/" class="btn btn-primary"
             >Volver</router-link>
         <div class="wrapper fadeInDown">
-  <div id="formContent">>
+  <div id="formContent">
    <h5>Ingresá a tu cuenta</h5>
     <div class="fadeIn first">
       <img src="../assets/moneymanager.png" id="icon" alt="User Icon" />
@@ -11,7 +11,7 @@
     <form>
       <input type="text" id="login" class="fadeIn second" name="username" v-model="input.username" placeholder="Username">
       <input type="password" id="password" class="fadeIn third" name="password" v-model="input.password" placeholder="Password">
-      <input v-on:click="validarLogin()" type="submit" class="fadeIn fourth" value="Log In">
+      <input v-on:click="validarLogin()" type="submit"  class="fadeIn fourth" value="Log In">
     </form>
   </div>
 </div>
@@ -35,10 +35,12 @@ import { useStore } from '../store/store';
         },
         methods: {
             async validarLogin() {
-          if (this.store.validarUsuario(this.input.username, this.input.password)) {
+              console.log('entro a validar')
+          if (await this.store.validarUsuario(this.input.username, this.input.password)) {
+            console.log('valide')
             console.log(this.input.username)
             await this.store.init(); 
-          this.$router.push('home') 
+            await this.$router.push('home') 
           }
           },
         }
@@ -73,9 +75,6 @@ h2 {
   color: #cccccc;
 }
 
-
-
-/* STRUCTURE */
 
 .wrapper {
   display: flex;
@@ -252,7 +251,7 @@ input[type=text]:placeholder {
   animation-duration:1s;
 }
 
-.fadeIn.first {
+ .fadeIn.first {
   -webkit-animation-delay: 0.4s;
   -moz-animation-delay: 0.4s;
   animation-delay: 0.4s;
@@ -274,7 +273,7 @@ input[type=text]:placeholder {
   -webkit-animation-delay: 1s;
   -moz-animation-delay: 1s;
   animation-delay: 1s;
-}
+} 
 
 /* Simple CSS3 Fade-in Animation */
 .underlineHover:after {

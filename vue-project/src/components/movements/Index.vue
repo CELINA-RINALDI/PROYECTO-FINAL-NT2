@@ -17,36 +17,57 @@
         </div>
     </div>
 </template>
-
-<script setup>
-import { toRefs, defineProps, computed } from 'vue';
-import Movimiento from "./Movimiento.vue";
-import { useStore } from "../../store/store";
-const props = defineProps({
-    movimientos: {
-        type: Array,
-        default: () => [],
+<script>
+import { useStore } from  '../../store/store';
+import Movimiento from "../movements/Movimiento.vue";
+export default {
+  name: "Index",
+    components: {
+        Movimiento,
     },
-});
-/*const { movimientos } = toRefs(props);*/
- const store = useStore();
-const remove = async (id) => {
-   await store.eliminarMovimiento(id);
+    data() {
+      return {
+      movimientos: [],
+      saldoActual: 0,
+    };
+    },
+    created() {
+    this.movimientos = this.store.movimientos;
+    this.store.cargarSaldoActual(this.totalIngresos - this.totalGastos);
+    this.saldoActual =  this.store.saldoActual; 
+    },
+  setup() {
+   const store = useStore();
+   return {store}
+  },
+  computed: {
+    saldoActualizado() {
+     this.store.cargarSaldoActual(this.totalIngresos - this.totalGastos);
+      this.saldoActual = totalIngresos - totalGastos;
+     return this.totalIngresos - this.totalGastos
+    },
+    totalGastos() {
+    const gastos = this.store.movimientos.filter(mov => mov.esGasto);
+     return gastos.reduce(
+    (previousValue, currentValue) => previousValue + currentValue.amount,
+    0
+    );
+   },
+   totalIngresos(){
+  const gastos = this.store.movimientos.filter(mov => !mov.esGasto);
+  return gastos.reduce(
+    (previousValue, currentValue) => previousValue + currentValue.amount,
+    0
+  );
+  }, 
+  },
+  methods: {
+    async remove(id){
+      await this.store.eliminarMovimiento(id);
+    },
 }
-const totalGastos = computed(() => {
-  const gastos = store.movimientos.filter(mov => mov.esGasto);
-  return gastos.reduce(
-    (previousValue, currentValue) => previousValue + currentValue.amount,
-    0
-  );
-})
-const totalIngresos = computed(() => {
-  const gastos = store.movimientos.filter(mov => !mov.esGasto);
-  return gastos.reduce(
-    (previousValue, currentValue) => previousValue + currentValue.amount,
-    0
-  );
-})
+}
+
 </script>
 
 <style scoped>

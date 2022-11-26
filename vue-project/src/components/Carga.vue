@@ -63,10 +63,12 @@ import { useStore } from '../store/store';
             if(elementoActivo) {
                 if(elementoActivo.value == 'gasto') {
                     this.input.esGasto = true;
-                    this.store.actualizarSegmento(this.input)
+                    this.store.actualizarSegmento(this.input, 'a')
       
                 } else {
                     this.input.esGasto = false;
+                    console.log('me fui a ver si ahorro')
+                    this.store.verificarAhorros(this.input);
                 }
             } else {
                 alert('Faltan campos por completar!');
@@ -91,11 +93,11 @@ import { useStore } from '../store/store';
 }
 
 form {
-   margin: 0 auto; /* Centramos el formulario */
-   width: 300px;   /* Sin ancho no podemos centrar el formulario */
-   background-color: white; /* Color blanco para el formulario */
-   padding: 2px; /* separamos los bordes del form del resto de elementos */
-   border-radius: 10px; /* Redondeamos los bordes del form */
+   margin: 0 auto;
+   width: 300px;   
+   background-color: white; 
+   padding: 2px; 
+   border-radius: 10px;
 }
 
 </style>
