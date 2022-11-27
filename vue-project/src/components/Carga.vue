@@ -22,12 +22,11 @@
         <label for="ingreso">Ingreso</label><br>
        <label for="categoria">Categoria</label>
        <select name="categoria" id="categoria" class="form-control" v-model="input.categoria">
-      <!--  <div v-for="segmento in this.store.segmentos" :key="segmento.id"> <option v-if="esUsuario(segmento.userId)" :value="segmento.id">{{segmento.nombre}}</option></div>-->
    <option value="Veterinaria">Veterinaria</option>
        <option value="Supermercado">Supermercado</option>
        <option value="Servicios">Servicios</option>
        <option value="Entretenimiento">Entretenimiento</option>
-       <option value="Gastos Imprevistos">Gastos imprevistos</option>
+       <option value="Gastos imprevistos">Gastos imprevistos</option>
        <option value="Otros">Otros</option>
        </select>
        <br><br>

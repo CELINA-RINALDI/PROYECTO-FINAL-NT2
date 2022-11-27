@@ -38,9 +38,12 @@ const props = defineProps({
     },
     categoria: {
         type: String,
+    }, 
+    userId: {
+        type: Number, 
     }
 });
-const { id, title, description, amount, esGasto, categoria} = toRefs(props);
+const { id, title, description, amount, esGasto, categoria, userId} = toRefs(props);
 const amountCurrency = computed(
     () => currencyFormatter.format(amount.value)
 );

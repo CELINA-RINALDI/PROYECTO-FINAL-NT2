@@ -33,6 +33,8 @@ import { useStore } from '../store/store';
             const store = useStore();
            return { store };
         },
+        created() {
+        },
         methods: {
             async validarLogin() {
               console.log('entro a validar')
@@ -126,7 +128,7 @@ h2.active {
 
 /* FORM TYPOGRAPHY*/
 
-input[type=button], input[type=submit], input[type=reset]  {
+input[type=button], input[type=submit],input[type=reset] {
   background-color: #56baed;
   border: none;
   color: white;
@@ -232,9 +234,9 @@ input[type=text]:placeholder {
 }
 
 /* Simple CSS3 Fade-in Animation */
-@-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+ @-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 @-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
-@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } } 
 
 .fadeIn {
   opacity:0;
@@ -270,7 +272,7 @@ input[type=text]:placeholder {
 }
 
 .fadeIn.fourth {
-  -webkit-animation-delay: 1s;
+ -webkit-animation-delay: 1s;
   -moz-animation-delay: 1s;
   animation-delay: 1s;
 } 

@@ -53,7 +53,8 @@ export const useStore = defineStore('nt2', {
         async cargarMovimientos() {
             const response = await fetch(this.url + 'movements/')
             const results = await response.json()
-            this.movimientos = results
+            let movUser = results.filter(mov => mov.userId == this.usuarioActual.id)
+            this.movimientos = movUser;
         },
         async getAhorros() {
             const response = await fetch(this.url + 'saving/')
@@ -72,6 +73,7 @@ export const useStore = defineStore('nt2', {
         },
          async validarUsuario(mail, contra) {
             let i = 0
+            console.log('vine a validar al metodo validarUsuario')
             while (!this.usuarioValido && i < this.users.length) {
                 if (mail == this.users[i].mail && contra == this.users[i].password) {
                     this.usuarioValido = true;
@@ -86,6 +88,7 @@ export const useStore = defineStore('nt2', {
         },
        async agregarMovimiento(mov) {       
         mov.amount = parseInt(mov.amount)
+        mov.userId = this.usuarioActual.id;
         let res = await fetch(this.url + 'movements', {
             method: 'POST',
             headers: {
