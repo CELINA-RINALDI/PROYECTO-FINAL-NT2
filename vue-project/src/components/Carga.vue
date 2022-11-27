@@ -20,7 +20,7 @@
        <label for="gasto">Gasto</label><br>
         <input type="radio" id="ingreso" name="tipo" value="ingreso" v-model="input.esGasto">
         <label for="ingreso">Ingreso</label><br>
-       <label for="categoria">Categoria</label>
+       <label for="categoria">Segmento</label>
        <select name="categoria" id="categoria" class="form-control" v-model="input.categoria">
    <option value="Veterinaria">Veterinaria</option>
        <option value="Supermercado">Supermercado</option>

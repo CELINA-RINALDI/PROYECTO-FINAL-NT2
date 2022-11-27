@@ -204,6 +204,25 @@ export const useStore = defineStore('nt2', {
                     i++;
                 }
            }
+       },
+
+       async agregarSegmento(mov){
+         mov.userId = this.usuarioActual.id;
+        let res = await fetch(this.url + 'segment', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(mov)
+        });
+
+        if (res.ok) {
+          console.log('movimiento cargado!');
+          this.cargarSegmentos(); 
+        } else {
+            alert('error cargando el movimiento');
+        }
+
        }
         }
      },

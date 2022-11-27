@@ -10,7 +10,7 @@ import UserLogin from './components/UserLogin.vue'
 import Landing from './components/Landing.vue'
 import "bootstrap/dist/css/bootstrap.css";
 import pinia from '@/store/index';
-
+import CargaSegmento from './components/CargaSegmento.vue'
 
 
 const routes = [
@@ -26,6 +26,8 @@ component: Carga },
 component: UserLogin },
 {path: '/',
 component: Landing },
+{path: '/cargaSegmento',
+component: CargaSegmento },
 
 
 ]

@@ -2,6 +2,8 @@
     <div class="segmentos">
         <router-link to="/home" class="boton btn btn-primary"
             >Volver a Home</router-link>
+            <router-link to="/cargaSegmento" class="boton btn btn-primary"
+            >Agregar Segmento</router-link>
 <h1>Tus gastos segmentados:</h1>
 <div class="container">
 <div class="segmento"
@@ -19,6 +21,10 @@
   </div>
 </div> 
 </div>
+<div class="segmento">
+                <h5>{{nombre}}</h5>
+
+  </div>
 </div>
 </div>
 </template>
