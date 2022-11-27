@@ -8,6 +8,7 @@ export const useStore = defineStore('nt2', {
     usuarioActual: null,
     userName: '',
     saldo: 0,
+    segmentos: 0,
     users: [{
         name: 'Admin',
         mail: 'admin@a.com',
@@ -96,17 +97,23 @@ export const useStore = defineStore('nt2', {
             alert('error eliminando el movimiento');
         }
     },
-  /* async actualizarSegmento(mov){
-          const response = await fetch(this.url + 'segments/')
-           const results = await response.json()
-            i = 0;
-            encontrado = false;
+    async cargarSegmento() {
+        const response = await fetch(this.url + 'segment/')
+        const results = await response.json()
+        this.segmentos = results
+    },
+     
+   async actualizarSegmento(mov){
+          let res = await fetch(this.url + 'segment')
+           let results = await res.json()
+            let i = 0;
+            let encontrado = false;
            while(i < results.length && !encontrado) {
-                if(results[i].userId == this.usuarioActual.id && results[i].nombre == mov.categoria) {
+                if(results[i].userId == this.usuarioActual.id && results[i].nombre == mov.nombre) {
                     segAux = results[i]
-                    segAux.monto = segAux.monto + mov.amount;
-                    let res = await fetch(this.url + 'segments/' + results[i].id, {
-                        method: 'PUT',
+                    segAux.monto = segAux.monto + mov.monto;
+                    let res = await fetch(this.url + 'segment' + results[i].id, {
+                        method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
                         },
@@ -122,7 +129,7 @@ export const useStore = defineStore('nt2', {
                     i++;
                 }
            }
-       } */
+       } 
         }
      },
 )

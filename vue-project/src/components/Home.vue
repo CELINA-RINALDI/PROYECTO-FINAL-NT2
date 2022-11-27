@@ -14,8 +14,6 @@
           ></li>
   </ul>
   </nav>
-     <div>Saldo:</div>
-     <div>$ {{store.saldo}}</div>
   <div class="movimientos">
             <Movimientos
                 :movimientos="movimientos"
