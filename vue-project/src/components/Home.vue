@@ -1,9 +1,8 @@
 <template>
 <div>
-  <div>Bienvenido, {{store.userName}}</div>
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> 
-  <nav class="navbar navbar-inverse" id="nav">
-  <ul class="nav navbar-nav" id="nav">
+<nav class="navbar navbar-inverse navbar-expand-md" id="nav">
+  <ul class="nav navbar-nav mr-auto" id="nav">
     <li> <router-link to="/carga">Carga</router-link
           ></li>
     <li><router-link to="/Segmentos">Segmentos</router-link
@@ -13,6 +12,15 @@
           <li><router-link to="/">Log out</router-link
           ></li>
   </ul>
+
+  <div class="navright">
+
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <div class="navtext">Bienvenido: <br>{{store.userName}}</div>
+    </li>
+  </ul>
+  </div>
   </nav>
   <div class="movimientos">
             <Movimientos
@@ -69,8 +77,14 @@ export default {
   height: 100px;
 }
 #nav {
-   display: inline-block;
    width: 100%;
+}
+.navtext{
+  color: white;
+}
+.navright{
+  justify-content: start;
+  padding-right: 3%;
 }
 </style>
 
