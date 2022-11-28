@@ -36,7 +36,6 @@ import { useStore } from '../store/store';
         methods: {
              validarLogin() {
               this.store.resetUsuario(); 
-              console.log('entro a validar')
           if (this.store.validarUsuario(this.input.username, this.input.password)) {
             console.log('valide')
             console.log(this.input.username)
