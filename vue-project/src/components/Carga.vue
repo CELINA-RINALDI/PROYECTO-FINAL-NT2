@@ -22,7 +22,6 @@
         <label for="ingreso">Ingreso</label><br>
        <label for="categoria">Segmento</label>
        <select name="categoria" id="categoria" class="form-control" v-model="input.categoria">
-      <!--  <option v-for="segmento in segmentos" :value="segmento.value" :key="segmento.id"> {{segmento.nombre}}</option>-->
        <option value="Veterinaria">Veterinaria</option>
        <option value="Supermercado">Supermercado</option>
        <option value="Servicios">Servicios</option>
