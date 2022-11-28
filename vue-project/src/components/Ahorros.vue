@@ -1,43 +1,119 @@
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js"></script>
+<script type="text/javascript" src="jscript/graph.js"></script> 
 <template>
-<div>
-  <form id="search" v-on:submit.prevent>
-    Busqueda: <input name="query" v-model="searchQuery">
-  </form>
-  <Tabla
-    :data="gridData"
-    :columns="gridColumns"
-    :columnsText="columnsHeader"
-    :filter-key="searchQuery">
-  </Tabla>
+    <div class="ahorros">
+        <canvas id="grafica"></canvas>
+    <router-link to="/home" class="btn btn-primary"
+            >Volver</router-link>
+            <h3>Tus ahorros en lo que va del año:</h3>
+            <div class="container">
+<div class="ahorro"
+   v-for="{id, amount, month, userId } in this.ahorros"
+                :key="id"
+                :id="id"
+                :amount="amount"
+                :month="month"
+                :userId="userId">
+                <div class="card ">
+                 <div class="card-body">
+                <h5 class="card-title">{{getNombreMes(month)}}</h5>
+                <h5 class="card-title">{{'$'+amount}}</h5>
+            </div>
+</div> 
 </div>
+</div>
+        </div>
+        
 </template>
 
 <script>
-import Tabla from './Tabla.vue'
+import { useStore } from '../store/store';
 export default {
-  name: 'Ahorros',
-  components: {
-    Tabla
-  },
-  data() {
-    //Simular peticion BackEnd
-    return {
-        searchQuery: '',
-        gridColumns: ['description', 'amount', 'createdAt'],
-        columnsHeader: ['Descripcion del ahorro', 'Monto ahorrado', 'Fecha de carga'],
-        gridData: [
-            {"createdAt":"2022-10-31T05:32:01.851Z","userid":19,"amount":19,"description":"description 1","id":"1"},
-            {"createdAt":"2022-10-31T03:50:27.753Z","userid":41,"amount":70,"description":"description 2","id":"2"},
-            {"createdAt":"2022-10-31T16:23:23.314Z","userid":33,"amount":55,"description":"description 3","id":"3"},
-            {"createdAt":"2022-10-31T22:14:05.044Z","userid":35,"amount":31,"description":"description 4","id":"4"},
-            {"createdAt":"2022-10-31T05:02:10.448Z","userid":44,"amount":3,"description":"description 5","id":"5"},
-            {"createdAt":"2022-10-31T15:22:15.670Z","userid":0,"amount":80,"description":"description 6","id":"6"},
-            {"createdAt":"2022-10-31T13:58:13.848Z","userid":77,"amount":92,"description":"description 7","id":"7"},
-            {"createdAt":"2022-10-31T07:08:31.639Z","userid":68,"amount":23,"description":"description 8","id":"8"},
-            {"createdAt":"2022-10-31T01:38:06.108Z","userid":49,"amount":30,"description":"description 9","id":"9"},
-            {"createdAt":"2022-10-31T22:49:01.249Z","userid":53,"amount":1,"description":"description 10","id":"10"}
-        ],
-    }
-  },
+    name: 'Ahorros',
+    data() {
+         return {
+            ahorros : []
+         }
+        },
+        setup() {
+            const store = useStore();
+           return { store };
+        },
+        created() {
+           this.cargarAhorros();
+        },
+        methods: {
+            async cargarAhorros() {
+                var todosAhorros = await this.store.getAhorros();
+                var auxAhorros = [];
+                var today = new Date();
+                console.log(today);
+                var month = today.getMonth() + 1;
+                console.log(month)
+                for (let i = 0; i < month; i++) {
+                    auxAhorros.push(todosAhorros[i])        
+                }
+                this.ahorros = auxAhorros;
+            },
+            getNombreMes(numero) {
+            let nombre = ''; 
+            switch (numero) {
+                case 1:
+                    nombre = 'Enero';
+                    break;
+                    case 2:
+                    nombre = 'Febrero';
+                    break;   
+                     case 3:
+                     nombre =  'Marzo';
+                    break;  
+                    case 4:
+                    nombre =  'Abril';
+                    break;    
+                    case 5:
+                    nombre =  'Mayo';
+                    break; 
+                     case 6:
+                     nombre =  'Junio';
+                    break;   
+                     case 7:
+                     nombre =  'Julio';
+                    break;   
+                     case 8:
+                     nombre =  'Agosto';
+                    break;  
+                    case 9:
+                    nombre =  'Septiembre';
+                    break;  
+                      case 10:
+                      nombre =  'Octubre';
+                    break;   
+                     case 11:
+                     nombre = 'Noviembre';
+                    break;   
+                     case 12:
+                     nombre =  'Diciembre';
+                    break;
+                default:
+                    break;
+            }
+            return nombre;
+            }
+        },
 }
 </script>
+
+<style scoped>
+.card-title {
+   font-weight:bold; 
+}
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: var(--max);
+  text-align: center;
+}
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+</style>

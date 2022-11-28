@@ -1,55 +1,34 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
 
 <template>
-  <div id="app">
-   <!--   <header>
-   <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-      <div class="wrapper">
-        <HelloWorld msg="You did it!" />
-      </div>
-    </header>
-
-    <main>
-      <TheWelcome />
-    </main> --> 
-    <router-link to="/">Home</router-link>
-    <router-link to="/segmentos">Segmentos</router-link>
-    <router-link to="/ahorros">Ahorros</router-link>
-    <router-link to="/carga">Carga</router-link>
-    <router-link to="/userlogin">User Login</router-link>
-    <router-view></router-view>
+ <div id="app">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+   <router-view></router-view>
   </div>
 </template>
+<script>
+import { useStore } from './store/store';
 
-<style scoped>
-header {
-  line-height: 1.5;
+export default {
+  name: 'App',
+  setup() {
+    // dejamos disponible el store
+    const store = useStore();
+    return {store};
+  },
+  async created() {
+    /* if(this.store.validarUsuario("admin@a.com", "admin")) {
+     await this.store.init(); 
+    } */
+  } 
+};
+</script>
+
+<style>
+#app {
+  padding-top: 4.5rem;
+  width: 100%;
 }
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+.header {
+  background-color: #ffeee4;
 }
 </style>

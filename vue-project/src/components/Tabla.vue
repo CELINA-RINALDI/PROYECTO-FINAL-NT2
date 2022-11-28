@@ -1,6 +1,6 @@
 <template>
 <div>
-  <table>
+  <table class="table">
     <thead>
       <tr>
         <th v-for="key in columnsText"
@@ -13,21 +13,51 @@
         </th>
       </tr>
     </thead>
-    <tbody>
+    <tbody class="content">
       <tr v-for="entry in filteredData" :key="entry.id">
-        <td v-for="key in columns" :key="key">
+        <td v-for="key in columns" :key="key" >
           {{entry[key]}}
         </td>
       </tr>
     </tbody>
   </table>
-  <br>Total de Ahorros: {{
+  <div class="sum">
+    <br>Total de Ahorros: {{
     filteredData.reduce((acc, obj)=> {
       return acc + obj.amount;
     },0 )
   }}
+  </div>
 </div>
 </template>
+
+<style scoped>
+#table {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 16px;
+  border-radius: 8px;
+  box-sizing: border-box;
+  opacity: 0.7;
+    color: black;
+}
+#table .content {
+  width: 100%;
+}
+#table .td{
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  padding: 8px;
+}
+.sum {
+  margin: 8px 16px 24px 16px;
+  color: var(--brand-blue);
+}
+</style>
+
 <script>
 export default {
   name: 'Tabla',
