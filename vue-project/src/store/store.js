@@ -50,6 +50,9 @@ export const useStore = defineStore('nt2', {
            await this.cargarMovimientos();
            await this.getAhorros();
         },
+        resetUsuario() {
+            this.usuarioValido = false; 
+        },
         async cargarMovimientos() {
             const response = await fetch(this.url + 'movements/')
             const results = await response.json()
@@ -173,7 +176,6 @@ export const useStore = defineStore('nt2', {
             let i = 0;
             let encontrado = false;
            while(i < results.length && !encontrado) {
-            console.log(results[i].nombre , mov.categoria)
                 if(results[i].userId == this.usuarioActual.id && results[i].nombre == mov.categoria) {
                     encontrado = true;
                     let segAux = results[i]
