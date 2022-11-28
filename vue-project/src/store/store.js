@@ -127,9 +127,6 @@ export const useStore = defineStore('nt2', {
     },
     async actualizarAhorro(monto) {
         let mesActual = new Date().getMonth() + 1;
-        console.log("mes actual " + mesActual)
-        console.log("ahorros: " + this.ahorros.toString())
-        console.log("user actual " + this.usuarioActual.toString())
         let ahorroBuscado = this.ahorros.find(ahorro => ahorro.userid == this.usuarioActual.id && ahorro.month == mesActual)
         console.log("ahorroBuscado" + ahorroBuscado.toString())
         ahorroBuscado.amount = ahorroBuscado.amount + this.saldoActual;
@@ -166,9 +163,7 @@ export const useStore = defineStore('nt2', {
 	}
     },
     async verificarAhorros(mov){
-        console.log('veo monto');
-       if(mov.amount >= 100.000) {
-        console.log('deberia tirar alerta ahorro')
+       if(mov.amount >= 100000) {
         this.alertaAhorro(mov.monto);
        }
     },

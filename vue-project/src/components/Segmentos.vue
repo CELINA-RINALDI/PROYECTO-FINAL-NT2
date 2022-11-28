@@ -21,10 +21,6 @@
   </div>
 </div> 
 </div>
-<div class="segmento">
-                <h5>{{nombre}}</h5>
-
-  </div>
 </div>
 </div>
 </template>
