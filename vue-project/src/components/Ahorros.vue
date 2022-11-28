@@ -1,5 +1,4 @@
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js"></script>
-<script type="text/javascript" src="jscript/graph.js"></script> 
+
 <template>
     <div class="ahorros">
         <canvas id="grafica"></canvas>

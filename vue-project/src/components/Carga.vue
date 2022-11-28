@@ -22,23 +22,17 @@
         <label for="ingreso">Ingreso</label><br>
        <label for="categoria">Segmento</label>
        <select name="categoria" id="categoria" class="form-control" v-model="input.categoria">
-        <option v-for="segmento in segmentos" :value="segmento.value" :key="segmento.id"> {{segmento.nombre}}</option>
-   <!--<option value="Veterinaria">Veterinaria</option>
+      <!--  <option v-for="segmento in segmentos" :value="segmento.value" :key="segmento.id"> {{segmento.nombre}}</option>-->
+       <option value="Veterinaria">Veterinaria</option>
        <option value="Supermercado">Supermercado</option>
        <option value="Servicios">Servicios</option>
        <option value="Entretenimiento">Entretenimiento</option>
        <option value="Gastos imprevistos">Gastos imprevistos</option>
-       <option value="Otros">Otros</option>-->
+       <option value="Otros">Otros</option>
        </select>
        <br><br>
        <button v-on:click="validarDatos()">Agregar</button>
      </form>
-     <div>
-        <select v-model="segmentoSeleccionado">
-       
-            
-        </select>
-     </div>
     </div>
 </template>
 
@@ -54,14 +48,9 @@ import { useStore } from '../store/store';
                     amount: 0, 
                     esGasto: null,
                     categoria: "",
-                    segmentoSeleccionado:{},
-                    segmentos:[]
                 }
             }
         },
-        created() {
-    this.segmentos = this.store.segmentos;
-    },
         setup() {
             const store = useStore();
            return { store };
@@ -90,10 +79,6 @@ import { useStore } from '../store/store';
           } else {
             alert('Faltan campos por completar!');
           }
-          },
-          async cargarSegmentos() {
-            await this.store.cargarSegmentos();
-            this.segmentos = this.store.segmentos; 
           },
         }
     }

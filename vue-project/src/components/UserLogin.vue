@@ -9,9 +9,9 @@
       <img src="../assets/moneymanager.png" id="icon" alt="User Icon" />
     </div>
     <form>
-      <input type="text" id="login" class="fadeIn second" name="username" v-model="input.username" placeholder="Username">
-      <input type="password" id="password" class="fadeIn third" name="password" v-model="input.password" placeholder="Password">
-      <input v-on:click="validarLogin()" type="submit"  class="fadeIn fourth" value="Log In">
+      <input type="text" id="login" name="username" v-model="input.username" placeholder="Username">
+      <input type="password" id="password"  name="password" v-model="input.password" placeholder="Password">
+      <input v-on:click="validarLogin" type="submit"  value="Log In">
     </form>
   </div>
 </div>
@@ -33,16 +33,14 @@ import { useStore } from '../store/store';
             const store = useStore();
            return { store };
         },
-        created() {
-        },
         methods: {
-            async validarLogin() {
+             validarLogin() {
               console.log('entro a validar')
-          if (await this.store.validarUsuario(this.input.username, this.input.password)) {
+          if (this.store.validarUsuario(this.input.username, this.input.password)) {
             console.log('valide')
             console.log(this.input.username)
-            await this.store.init(); 
-            await this.$router.push('home') 
+             this.store.init(); 
+             this.$router.push('home') 
           }
           },
         }
